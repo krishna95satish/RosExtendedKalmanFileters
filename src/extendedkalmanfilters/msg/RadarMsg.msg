@@ -1,0 +1,10 @@
+std_msgs/Header header
+string videoName_
+int16 frame_
+float64 radarRange_
+float64 radarAngle_
+int64 cameraTick_
+int64 radarTick_
+float64 lateralDistance_
+int8 targetID_
+int8 dataConfidence_
