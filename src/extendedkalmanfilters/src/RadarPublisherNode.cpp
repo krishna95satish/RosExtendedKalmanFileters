@@ -6,7 +6,7 @@
 
 RadarPublisherNode::RadarPublisherNode(const std::string& fileName) {
     radarInput_->setFileName(fileName);
-    radarPublish_ = lidarNode_.advertise<extendedkalmanfilters::RadarMeasurements>(gRadarMsgname, gQueueSize);
+    radarPublish_ = radarNode_.advertise<extendedkalmanfilters::RadarMeasurements>(gRadarMsgname, gQueueSize);
 }
 
 void RadarPublisherNode::getData() {

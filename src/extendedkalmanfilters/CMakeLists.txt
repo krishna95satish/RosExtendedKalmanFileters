@@ -17,7 +17,11 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
 )
 
-find_package(OpenCV)
+find_package(cmake_modules REQUIRED)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+find_package(Eigen REQUIRED)
+include_directories(${Eigen_INCLUDE_DIRS})
+
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -55,7 +59,7 @@ find_package(OpenCV)
 ## Generate messages in the 'msg' folder
   add_message_files(
     FILES
-    RadarMsg.msg
+    FusedMesurements.msg
     RadarMeasurements.msg
     LidarMeasurements.msg
 #   Message2.msg
@@ -114,7 +118,8 @@ catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES extendedkalmanfilters
 #  CATKIN_DEPENDS roscpp std_msgs
-#  DEPENDS system_lib
+#  DEPENDS system_lib#CATKIN_DEPENDS message_runtime std_msgs
+DEPENDS Eigen
 )
 
 ###########
@@ -156,7 +161,8 @@ include_directories(
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
-# )
+
+ #)
 
 #############
 ## Install ##
@@ -215,21 +221,21 @@ include_directories(
 
 
 add_executable(LidarPublisher src/Node.cpp src/lidarPublisherNode.cpp src/lidarInput.cpp src/RadarInput.cpp src/Ros.cpp)
-target_link_libraries(LidarPublisher ${catkin_LIBRARIES} ${OpenCV_LIBS})
+target_link_libraries(LidarPublisher ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
 add_dependencies(LidarPublisher extendedkalmanfilters_generate_messages_cpp )
 #
 add_executable(RadarPublisher src/RadarPublisherNode.cpp src/Node.cpp src/lidarInput.cpp src/RadarInput.cpp src/Ros.cpp)
-target_link_libraries(RadarPublisher ${catkin_LIBRARIES} ${OpenCV_LIBS})
+target_link_libraries(RadarPublisher ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
 add_dependencies(RadarPublisher extendedkalmanfilters_generate_messages_cpp )
 #
-#add_executable(FusionNode src/Node.cpp src/FusionNode.cpp src/PolarToCartConverter.cpp src/CameraInput.cpp src/RadarInput.cpp src/Ros.cpp)
-#target_link_libraries(FusionNode ${catkin_LIBRARIES} ${OpenCV_LIBS})
-#add_dependencies(FusionNode extendedkalmanfilters_generate_messages_cpp )
+add_executable(FusionNode src/Node.cpp src/FusionNode.cpp  src/lidarInput.cpp src/RadarInput.cpp src/Ros.cpp src/Ros.cpp src/kalman_filter.cpp src/FusionEKF.cpp src/tools.cpp)
+target_link_libraries(FusionNode ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
+add_dependencies(FusionNode extendedkalmanfilters_generate_messages_cpp )
 
 add_executable(rosBagCreator src/rosBagCreatorMain.cpp src/rosBagCreator.cpp src/Ros.cpp)
-target_link_libraries(rosBagCreator ${catkin_LIBRARIES})
+target_link_libraries(rosBagCreator ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
 add_dependencies(rosBagCreator extendedkalmanfilters_generate_messages_cpp )
 
 #add_executable(CameraInputVideoToRosbag src/CameraInputVideoToRosbag.cpp src/CameraInputVideoToRosbagMain.cpp src/Ros.cpp)
-#target_link_libraries(CameraInputVideoToRosbag ${catkin_LIBRARIES} ${OpenCV_LIBS})
+#target_link_libraries(CameraInputVideoToRosbag ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
 #add_dependencies(CameraInputVideoToRosbag extendedkalmanfilters_generate_messages_cpp )

@@ -17,8 +17,10 @@ class Node {
  protected:
     ros::NodeHandle lidarNode_;
     ros::NodeHandle radarNode_;
+    ros::NodeHandle fusionNode_;
     ros::Publisher radarPublish_;
     ros::Publisher lidarPublish_;
+    ros::Publisher fusionPublish_;
     ros::Subscriber subscribe_;
     std::vector<std::string> topics_{""};
 

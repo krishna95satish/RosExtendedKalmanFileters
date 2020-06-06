@@ -12,6 +12,7 @@
 #include <vector>
 #include "extendedkalmanfilters/RadarMeasurements.h"
 #include "extendedkalmanfilters/LidarMeasurements.h"
+#include "extendedkalmanfilters/FusedMesurements.h"
 
 class Input {
  public:

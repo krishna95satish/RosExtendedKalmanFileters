@@ -4,34 +4,43 @@
 #define CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_FUSIONNODE_H_
 
 #include <string>
+#include <vector>
 #include <queue>
+#include <Eigen/Eigen>
 #include "extendedkalmanfilters/Node.h"
-#include "extendedkalmanfilters/RadarMsg.h"
-#include "PolarToCartConverter.h"
+#include "extendedkalmanfilters/LidarMeasurements.h"
+#include "extendedkalmanfilters/RadarMeasurements.h"
+#include "extendedkalmanfilters/tools.h"
+#include "extendedkalmanfilters/FusionEKF.h"
+#include "extendedkalmanfilters/measurement_package.h"
+
+using Eigen::MatrixXd;
+using Eigen::VectorXd;
 
 class FusionNode : public Node {
  private:
     std::string currentFrameID_{0};
     ros::NodeHandle node_;
-    ros::Subscriber subscribe_;
-    image_transport::Subscriber imageTransportSubcribe_;
-    image_transport::Publisher imagePublish_;
-    image_transport::ImageTransport imageTransport_;
-    cv_bridge::CvImagePtr openCvFrame_{nullptr};
-    PolarToCartConverter polarToCartesianConverter_;
-    cv_bridge::CvImagePtr firstFrame_;
-    std::queue<extendedkalmanfilters::RadarMsg::ConstPtr> radarBuffer_;
-    std::queue<cv_bridge::CvImagePtr> frameBuffer_;
-    extendedkalmanfilters::RadarMsg::ConstPtr currentRadarFrameID_{nullptr};
+    ros::Subscriber radarSubscribe_;
+    ros::Subscriber lidarSubscribe_;
+    FusionEKF fusionEKF_;
+    Tools tools_;
+    MeasurementPackage measPackage_;
+    std::vector<VectorXd> estimations_;
+    std::vector<VectorXd> groundTruth_;
+    std::queue<extendedkalmanfilters::RadarMeasurements::ConstPtr> radarBuffer_;
+    std::queue<extendedkalmanfilters::LidarMeasurements::ConstPtr> lidarBuffer_;
+    extendedkalmanfilters::RadarMeasurements::ConstPtr currentRadarFrame_{nullptr};
+    extendedkalmanfilters::LidarMeasurements::ConstPtr currentLidarFrame_{nullptr};
 
  public:
     FusionNode();
     void subscribe();
     void publish();
-    void synchronize();
-    void plot();
-    void imageCallback(const sensor_msgs::Image::ConstPtr& cameraMsg);
-    void radarCallback(const extendedkalmanfilters::RadarMsg::ConstPtr& radarMsg);
+    void estimate();
+    void kalmanFilter();
+    void lidarCallback(const extendedkalmanfilters::LidarMeasurements::ConstPtr& lidaraMsg);
+    void radarCallback(const extendedkalmanfilters::RadarMeasurements::ConstPtr& radarMsg);
     void publishonedata();
     ~FusionNode() {}
 };
