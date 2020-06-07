@@ -14,6 +14,9 @@ void LidarPublisherNode::getData() {
         lidarInput_->read(gRadarTopicname);
         tempLidarData_ = lidarInput_->getData();
         lidarInput_->close();
+    } else {
+        std::cout << "Error Opening the Bag file, Killing the Node....." << std::endl;
+        ros::shutdown();
     }
 }
 

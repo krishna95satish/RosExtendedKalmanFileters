@@ -9,14 +9,10 @@ using std::cout;
 using std::endl;
 using std::vector;
 
-/**
- * Constructor.
- */
+
 FusionEKF::FusionEKF() {
   is_initialized_ = false;
-
   previous_timestamp_ = 0;
-
   // initializing matrices
   R_laser_ = MatrixXd(2, 2);
   R_radar_ = MatrixXd(3, 3);

@@ -9,7 +9,7 @@ const int gImagerate = 10;
 const int gFrameReset = 0;
 const int gQueueSize = 1000;
 const int gDebugMode = 1;
-const int gPublisherBaudRate  = 30;
+const int gPublisherBaudRate  = 1;
 const int gRadarplotconstant = -1;
 const int gsleepduration = 5;
 
@@ -35,8 +35,8 @@ constexpr char const* gArgument = "readCSV";
 constexpr char const* gFrameArgument = "frames";
 constexpr char const* gCameraTopicName = "CamData";
 constexpr char const* gColorStanderd = "bgr8";
-#define gLidarNodeFile "../AvmlEkfWs/ROSBagFiles/Lidar.bag"
-#define gRadarNodeFile "../AvmlEkfWs/ROSBagFiles/Radar.bag"
+#define gLidarNodeFile "/home/krishna/AVMLCodingHere/AvmlEkfWs/ROSBagFiles/Lidar.bag"
+#define gRadarNodeFile "/home/krishna/AVMLCodingHere/AvmlEkfWs/ROSBagFiles/Radar.bag"
 constexpr char const* CameraNodeFile = "../AvmlEkfWs/InputFiles/Camera.avi";
 constexpr char const* RadarDataFile = "../AvmlEkfWs/InputFiles/SensorData.csv";
 constexpr char const* gCamPubTopicName = "CamDataTopicOut";

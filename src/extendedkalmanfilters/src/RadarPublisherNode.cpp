@@ -14,6 +14,9 @@ void RadarPublisherNode::getData() {
         radarInput_->read(gRadarTopicname);
         tempRadarData_ = radarInput_->getData();
         radarInput_->close();
+    } else {
+        std::cout << "Error Opening the Bag file, Killing the Node....." << std::endl;
+        ros::shutdown();
     }
 }
 

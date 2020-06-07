@@ -26,19 +26,13 @@ class FusionNode : public Node {
     FusionEKF fusionEKF_;
     Tools tools_;
     MeasurementPackage measPackage_;
-    std::vector<VectorXd> estimations_;
-    std::vector<VectorXd> groundTruth_;
-    std::queue<extendedkalmanfilters::RadarMeasurements::ConstPtr> radarBuffer_;
-    std::queue<extendedkalmanfilters::LidarMeasurements::ConstPtr> lidarBuffer_;
-    extendedkalmanfilters::RadarMeasurements::ConstPtr currentRadarFrame_{nullptr};
-    extendedkalmanfilters::LidarMeasurements::ConstPtr currentLidarFrame_{nullptr};
+    extendedkalmanfilters::FusedMesurements fusedFrame_;
 
  public:
     FusionNode();
     void subscribe();
     void publish();
     void estimate();
-    void kalmanFilter();
     void lidarCallback(const extendedkalmanfilters::LidarMeasurements::ConstPtr& lidaraMsg);
     void radarCallback(const extendedkalmanfilters::RadarMeasurements::ConstPtr& radarMsg);
     void publishonedata();
