@@ -1,6 +1,6 @@
 // Copyright 2019 KPIT  [legal/copyright]
 
-#include "extendedkalmanfilters/lidarInput.h"
+#include "extendedkalmanfilters/LidarInput.h"
 
 void LidarInput::setFileName(const std::string& fname) {
     fileName_ = fname;

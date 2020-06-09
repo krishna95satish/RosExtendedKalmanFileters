@@ -9,7 +9,7 @@ const int gImagerate = 10;
 const int gFrameReset = 0;
 const int gQueueSize = 1000;
 const int gDebugMode = 1;
-const int gPublisherBaudRate  = 1;
+const int gPublisherBaudRate  = 50;
 const int gRadarplotconstant = -1;
 const int gsleepduration = 5;
 

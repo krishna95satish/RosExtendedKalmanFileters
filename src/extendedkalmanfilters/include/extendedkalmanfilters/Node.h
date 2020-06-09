@@ -1,4 +1,4 @@
-// Copyright 2019 KPIT  [legal/copyright]
+// Technische Hochschule Ingolstadt
 
 #ifndef CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_NODE_H_
 #define CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_NODE_H_
@@ -7,7 +7,9 @@
 #include <string>
 #include <vector>
 #include "Input.h"
-#include "lidarInput.h"
+#include "GlobalConsts.h"
+#include "Ros.h"
+#include "LidarInput.h"
 #include "RadarInput.h"
 #include "Include.h"
 

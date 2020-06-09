@@ -220,22 +220,18 @@ include_directories(
 # catkin_add_nosetests(test)
 
 
-add_executable(LidarPublisher src/Node.cpp src/lidarPublisherNode.cpp src/lidarInput.cpp src/RadarInput.cpp src/Ros.cpp)
+add_executable(LidarPublisher src/Node.cpp src/LidarPublisherNode.cpp src/LidarInput.cpp src/RadarInput.cpp src/Ros.cpp)
 target_link_libraries(LidarPublisher ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
 add_dependencies(LidarPublisher extendedkalmanfilters_generate_messages_cpp )
 #
-add_executable(RadarPublisher src/RadarPublisherNode.cpp src/Node.cpp src/lidarInput.cpp src/RadarInput.cpp src/Ros.cpp)
+add_executable(RadarPublisher src/RadarPublisherNode.cpp src/Node.cpp src/LidarInput.cpp src/RadarInput.cpp src/Ros.cpp)
 target_link_libraries(RadarPublisher ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
 add_dependencies(RadarPublisher extendedkalmanfilters_generate_messages_cpp )
 #
-add_executable(FusionNode src/Node.cpp src/FusionNode.cpp  src/lidarInput.cpp src/RadarInput.cpp src/Ros.cpp src/Ros.cpp src/kalman_filter.cpp src/FusionEKF.cpp src/tools.cpp)
+add_executable(FusionNode src/Node.cpp src/FusionNode.cpp  src/LidarInput.cpp src/RadarInput.cpp  src/Ros.cpp src/KalmanFilter.cpp src/ExtendedKF.cpp src/Tools.cpp)
 target_link_libraries(FusionNode ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
 add_dependencies(FusionNode extendedkalmanfilters_generate_messages_cpp )
 
-add_executable(rosBagCreator src/rosBagCreatorMain.cpp src/rosBagCreator.cpp src/Ros.cpp)
+add_executable(rosBagCreator src/RosBagCreatorMain.cpp src/RosBagCreator.cpp src/Ros.cpp)
 target_link_libraries(rosBagCreator ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
 add_dependencies(rosBagCreator extendedkalmanfilters_generate_messages_cpp )
-
-#add_executable(CameraInputVideoToRosbag src/CameraInputVideoToRosbag.cpp src/CameraInputVideoToRosbagMain.cpp src/Ros.cpp)
-#target_link_libraries(CameraInputVideoToRosbag ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
-#add_dependencies(CameraInputVideoToRosbag extendedkalmanfilters_generate_messages_cpp )

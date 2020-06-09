@@ -1,8 +1,6 @@
 // Copyright 2019 KPIT  [legal/copyright]
 
 #include "extendedkalmanfilters/RadarPublisherNode.h"
-#include "extendedkalmanfilters/GlobalConsts.h"
-#include "extendedkalmanfilters/Ros.h"
 
 RadarPublisherNode::RadarPublisherNode(const std::string& fileName) {
     radarInput_->setFileName(fileName);

@@ -19,6 +19,11 @@ void FusionNode::lidarCallback(const extendedkalmanfilters::LidarMeasurements::C
     fuse();
 }
 
+void FusionNode::publish() {
+    ROS_INFO("Publishing Fused Data");
+    fusionPublish_.publish(fusedFrame_);
+}
+
 void FusionNode::fuse() {
     extendedKF_.processMeasurement(measPackage_);
     fusedFrame_.x_estimated_ = extendedKF_.kf_.X_(0);
@@ -28,12 +33,6 @@ void FusionNode::fuse() {
     fusedFrame_.vy_estimated_ = extendedKF_.kf_.X_(3);
     publish();
 }
-
-void FusionNode::publish() {
-    ROS_INFO("Publishing Fused Data");
-    fusionPublish_.publish(fusedFrame_);
-}
-
 
 void FusionNode::radarCallback(const extendedkalmanfilters::RadarMeasurements::ConstPtr& radarMsg) {
     measPackage_.sensor_type_ = MeasurementPackage::RADAR;

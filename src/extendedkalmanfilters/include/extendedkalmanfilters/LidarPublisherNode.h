@@ -1,13 +1,14 @@
-// Copyright 2019 <KPIT> [legal/copyright]
+// Technische Hochschule Ingolstadt
 
-#ifndef CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_LidarPublisherNode_H_
-#define CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_LidarPublisherNode_H_
+#ifndef AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_LidarPublisherNode_H_
+#define AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_LidarPublisherNode_H_
 
 #include <vector>
 #include <string>
-#include "lidarInput.h"
+#include "LidarInput.h"
 #include "Node.h"
 #include "GlobalConsts.h"
+#include "Ros.h"
 
 class LidarPublisherNode : public Node {
  private:
@@ -26,4 +27,4 @@ class LidarPublisherNode : public Node {
     ~LidarPublisherNode(){}
 };
 
-#endif  // CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_LidarPublisherNode_H_
+#endif  // AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_LidarPublisherNode_H_

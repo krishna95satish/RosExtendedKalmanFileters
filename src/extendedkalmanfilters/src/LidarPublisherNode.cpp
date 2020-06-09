@@ -1,8 +1,4 @@
-// Copyright 2019 <KPIT>
-
-#include "extendedkalmanfilters/lidarPublisherNode.h"
-#include "extendedkalmanfilters/GlobalConsts.h"
-#include "extendedkalmanfilters/Ros.h"
+#include "extendedkalmanfilters/LidarPublisherNode.h"
 
 LidarPublisherNode::LidarPublisherNode(const std::string& fileName) {
     lidarInput_->setFileName(fileName);

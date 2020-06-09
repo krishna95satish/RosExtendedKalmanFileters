@@ -1,8 +1,6 @@
 // Technische Hochschule Ingolstadt
 
-#include "extendedkalmanfilters/Include.h"
-#include "extendedkalmanfilters/GlobalConsts.h"
-#include "extendedkalmanfilters/rosBagCreator.h"
+#include "extendedkalmanfilters/RosBagCreator.h"
 
 extendedkalmanfilters::RadarMeasurements radarMeasurement;
 extendedkalmanfilters::LidarMeasurements lidarMeasurement;
@@ -17,20 +15,18 @@ RosBagCreator::RosBagCreator() {
 
 void RosBagCreator :: read() {
   
-  int count = 0;
   std::string sensor_type, rho_measured, phi_measured, rhodot_measured, time_stamp,
   x_ground_truth, y_ground_truth, vx_ground_truth, vy_ground_truth, yaw_groundtruth, 
   yaw_rate_groundtruth, x_measured, y_measured;
+
   std::ifstream finput(RadarDataFile);
   std::string line;
   std::stringstream string(line);
-  
   while (getline(finput, line)) {
     std::stringstream string(line);
     std::getline(string, sensor_type, ',');
     if (sensor_type == "L") {
 
-      std::cout << "Lidar Data" << std::endl;
       std::string s_type;
       long long t;
       float x_m, y_m, x_gt, y_gt, vx_gt, vy_gt;
@@ -51,7 +47,6 @@ void RosBagCreator :: read() {
       y_gt = atof(y_ground_truth.c_str());
       vx_gt = atof(vx_ground_truth.c_str());
       vy_gt = atof(vy_ground_truth.c_str());
-      //std::cout << "x: " << x_m << "y_x: " << y_m << "x_gt: " << x_gt << "y_gt: " << y_gt << std::endl;
       lidarWrite(s_type, x_m, y_m, t, x_gt, y_gt, vx_gt, vy_gt);
 
     } else if (sensor_type == "R") {
@@ -79,15 +74,12 @@ void RosBagCreator :: read() {
       y_gt = atof(y_ground_truth.c_str());
       vx_gt = atof(vx_ground_truth.c_str());
       vy_gt = atof(vy_ground_truth.c_str());
-      //std::cout << "rh0:" << rho << "t" << t << std::endl;
       radarWrite(s_type, rho, phi, rhodot, t, x_gt, y_gt, vx_gt, vy_gt);
 
     } else {
       std::cout << "Unknown Data!! exiting" << std::endl;
       break;
     }
-    ++count;
-    std::cout << count << std::endl;
   }
 }
 

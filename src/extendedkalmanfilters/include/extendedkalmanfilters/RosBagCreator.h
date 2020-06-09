@@ -1,14 +1,17 @@
-// Copyright 2019 KPIT
+// Technische Hochschule Ingolstadt
 
-#ifndef CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_rosBagCreator_H_
-#define CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_rosBagCreator_H_
+#ifndef AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_ROSBAGCREATOR_H_
+#define AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_ROSBAGCREATOR_H_
 
-#include <extendedkalmanfilters/GlobalConsts.h>
+
+#include "GlobalConsts.h"
+#include "Include.h"
+#include "BagCreator.h"
+#include "Ros.h"
 #include "extendedkalmanfilters/RadarMeasurements.h"
 #include "extendedkalmanfilters/LidarMeasurements.h"
-#include "OutPut.h"
 
-class RosBagCreator : public OutPut {
+class RosBagCreator : public BagCreator {
  public:
   RosBagCreator();
   void read();
@@ -17,4 +20,4 @@ class RosBagCreator : public OutPut {
   void close();
 };
 
-#endif  // CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_rosBagCreator_H_
+#endif  // AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_ROSBAGCREATOR_H_
