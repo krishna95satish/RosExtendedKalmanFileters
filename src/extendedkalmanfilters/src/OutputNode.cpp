@@ -1,52 +1,71 @@
 // Technische Hochschule Ingolstadt
 
-#include "extendedkalmanfilters/FusionNode.h"
+#include "extendedkalmanfilters/OutputNode.h"
 
-FusionNode::FusionNode() {
-   fusionPublish_ = fusionNode_.advertise<extendedkalmanfilters::FusedMesurements>(gFusionMsgname, gQueueSize);
+OutputNode::OutputNode() {
+   rmsErrPublish_ = outputNode_.advertise<extendedkalmanfilters::RMSError>(gRmsErrorMsgname, gQueueSize);
 }
 
-void FusionNode::subscribe() {
-    lidarSubscribe_ = node_.subscribe(gLidarMsgname, gQueueSize, &FusionNode::lidarCallback, this);
-    radarSubscribe_ = node_.subscribe(gRadarMsgname, gQueueSize, &FusionNode::radarCallback, this);
+void OutputNode::subscribe() {
+    fusionSubscribe_ = fusionNode_.subscribe(gFusionMsgname, gQueueSize, &OutputNode::fusionCallback, this);
+    lidarSubscribe_ = lidarNode_.subscribe(gLidarMsgname, gQueueSize, &OutputNode::lidarCallback, this);
+    radarSubscribe_ = radarNode_.subscribe(gRadarMsgname, gQueueSize, &OutputNode::radarCallback, this);
+    
 }
 
-void FusionNode::lidarCallback(const extendedkalmanfilters::LidarMeasurements::ConstPtr& lidarMsg) {
-    measPackage_.sensor_type_ = MeasurementPackage::LASER;
-    measPackage_.rawMeasurements_ = VectorXd(2);
-    measPackage_.rawMeasurements_ << lidarMsg->x_measured_, lidarMsg->y_measured_;
-    measPackage_.timestamp_ = lidarMsg->time_stamp_;
-    fuse();
+void OutputNode::lidarCallback(const extendedkalmanfilters::LidarMeasurements::ConstPtr& lidarMsg) {
+    VectorXd gtValuesL(4);
+    gtValuesL(0) = lidarMsg->x_ground_truth_;
+    gtValuesL(1) = lidarMsg->y_ground_truth_; 
+    gtValuesL(2) = lidarMsg->vx_ground_truth_;
+    gtValuesL(3) = lidarMsg->vy_ground_truth_;
+    gtValues_.push_back(gtValuesL);
 }
 
-void FusionNode::publish() {
-    ROS_INFO("Publishing Fused Data");
-    fusionPublish_.publish(fusedFrame_);
+void OutputNode::radarCallback(const extendedkalmanfilters::RadarMeasurements::ConstPtr& radarMsg) {
+    VectorXd gtValuesR(4);
+    gtValuesR(0) = radarMsg->x_ground_truth_;
+    gtValuesR(1) = radarMsg->y_ground_truth_; 
+    gtValuesR(2) = radarMsg->vx_ground_truth_;
+    gtValuesR(3) = radarMsg->vy_ground_truth_;
+    gtValues_.push_back(gtValuesR);
 }
 
-void FusionNode::fuse() {
-    extendedKF_.processMeasurement(measPackage_);
-    fusedFrame_.x_estimated_ = extendedKF_.kf_.X_(0);
-    fusedFrame_.y_estimated_ = extendedKF_.kf_.X_(1);
-    fusedFrame_.time_stamp_ = measPackage_.timestamp_;
-    fusedFrame_.vx_estimated_ = extendedKF_.kf_.X_(2);
-    fusedFrame_.vy_estimated_ = extendedKF_.kf_.X_(3);
+
+void OutputNode::fusionCallback(const extendedkalmanfilters::FusedMesurements::ConstPtr& fusedMsg) {
+    VectorXd estValues(4);
+    estValues(0) = fusedMsg->x_estimated_;
+    estValues(1) = fusedMsg->y_estimated_;
+    estValues(2) = fusedMsg->vx_estimated_;
+    estValues(3) = fusedMsg->vy_estimated_;
+    estValues_.push_back(estValues);
+    if (gtValues_.size() != 0) {
+        rmsCalulate();
+    }
+    
+}
+
+
+void OutputNode::publish() {
+   //ROS_INFO("Publishing RMS Error.....");
+    rmsErrPublish_.publish(RMSError_);
+}
+
+void OutputNode::rmsCalulate() {
+    rmsErValues_ = tools_.calculateRMSE(estValues_, gtValues_);
+    RMSError_.x_err_ = rmsErValues_(0);
+    RMSError_.y_err_ = rmsErValues_(1);
+    RMSError_.vx_err_ = rmsErValues_(2);
+    RMSError_.vy_err_ = rmsErValues_(3);
     publish();
 }
 
-void FusionNode::radarCallback(const extendedkalmanfilters::RadarMeasurements::ConstPtr& radarMsg) {
-    measPackage_.sensor_type_ = MeasurementPackage::RADAR;
-    measPackage_.rawMeasurements_ = VectorXd(3);
-    measPackage_.rawMeasurements_ << radarMsg->rho_measured_, radarMsg->phi_measured_, radarMsg->rhodot_measured_;
-    measPackage_.timestamp_ = radarMsg->time_stamp_;
-    fuse();
-}
 
 int main(int argc, char** argv) {
     Ros ros;
-    ros.initialize(argc, argv, gFusionNode);
-    FusionNode fusionNode;
-    fusionNode.subscribe();
+    ros.initialize(argc, argv, gOutputNode);
+    OutputNode outputNode;
+    outputNode.subscribe();
     ros.spin();
     return 0;
 }

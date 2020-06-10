@@ -17,7 +17,7 @@ void LidarPublisherNode::getData() {
 }
 
 void LidarPublisherNode::publish() {
-    ROS_INFO("Publishing Lidar Data");
+    //ROS_INFO("Publishing Lidar Data");
     if (lidarMsgCounter_ != length()) {
         lidarPublish_.publish(tempLidarData_[lidarMsgCounter_]);
         nextFrame();
@@ -41,14 +41,14 @@ void LidarPublisherNode::repeatTransmission() {
 
 
 int main(int argc, char** argv) {
-    Ros ros_;
-    ros_.initialize(argc, argv, gLidarPublisherNode);
+    Ros ros;
+    ros.initialize(argc, argv, gLidarPublisherNode);
     LidarPublisherNode lidarPublisherNode(gLidarNodeFile);
     lidarPublisherNode.getData();
     ros::Rate loop_rate(gPublisherBaudRate);
     while (ros::ok()) {
         lidarPublisherNode.publish();
-        ros_.rate();
+        ros.rate();
         loop_rate.sleep();
     }
     return 0;

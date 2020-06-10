@@ -8,6 +8,7 @@
 #include "Node.h"
 #include "extendedkalmanfilters/LidarMeasurements.h"
 #include "extendedkalmanfilters/RadarMeasurements.h"
+#include "extendedkalmanfilters/RMSError.h"
 #include "Tools.h"
 #include "GlobalConsts.h"
 #include "Ros.h"
@@ -21,18 +22,20 @@ class OutputNode : public Node {
     ros::Subscriber radarSubscribe_;
     ros::Subscriber lidarSubscribe_;
     ros::Subscriber fusionSubscribe_;
+    vector<VectorXd> estValues_;
+    vector<VectorXd> gtValues_;
+    VectorXd rmsErValues_;
     Tools tools_;
-    MeasurementPackage measPackage_;
-    extendedkalmanfilters::FusedMesurements fusedFrame_;
+    extendedkalmanfilters::RMSError RMSError_;
 
  public:
     OutputNode();
     void subscribe();
     void publish();
-    void rmsError();
+    void rmsCalulate();
     void lidarCallback(const extendedkalmanfilters::LidarMeasurements::ConstPtr& lidaraMsg);
     void radarCallback(const extendedkalmanfilters::RadarMeasurements::ConstPtr& radarMsg);
-    void radarCallback(const extendedkalmanfilters::FusedMesurements::ConstPtr& fusedMsg);
+    void fusionCallback(const extendedkalmanfilters::FusedMesurements::ConstPtr& fusedMsg);
     ~OutputNode() {}
 };
 

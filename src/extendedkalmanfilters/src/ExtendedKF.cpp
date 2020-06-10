@@ -64,9 +64,9 @@ void ExtendedKF::processMeasurement(const MeasurementPackage& measurementPkg) {
     float dt = (measurementPkg.timestamp_ - previous_timestamp_) / 1000000.0;
   	previous_timestamp_ = measurementPkg.timestamp_;
   kf_.F_ << 1, 0, dt, 0,
-                 0, 1, 0, dt,
-                 0, 0, 1, 0,
-                 0, 0, 0, 1;
+            0, 1, 0, dt,
+            0, 0, 1, 0,
+            0, 0, 0, 1;
   int nax = 9;
   int nay = 9;
     kf_.Q_ << pow(dt,4.0)*nax/4, 0, pow(dt,3.0)*nax/2, 0,

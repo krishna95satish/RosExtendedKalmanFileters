@@ -1,4 +1,4 @@
-// Copyright 2019 KPIT  [legal/copyright]
+// Technische Hochschule Ingolstadt
 
 #include "extendedkalmanfilters/RadarPublisherNode.h"
 
@@ -19,7 +19,7 @@ void RadarPublisherNode::getData() {
 }
 
 void RadarPublisherNode::publish() {
-    ROS_INFO("Publishing Radar Data");
+    //ROS_INFO("Publishing Radar Data");
     if (radarMsgCounter_ != length()) {
         radarPublish_.publish(tempRadarData_[radarMsgCounter_]);
         nextFrame();
@@ -42,14 +42,14 @@ void RadarPublisherNode::repeatTransmission() {
 }
 
 int main(int argc, char** argv) {
-    Ros ros_;
-    ros_.initialize(argc, argv, gRadarPublisherNode);
+    Ros ros;
+    ros.initialize(argc, argv, gRadarPublisherNode);
     RadarPublisherNode radarPublisherNode(gRadarNodeFile);
     radarPublisherNode.getData();
     ros::Rate loop_rate(gPublisherBaudRate);
     while (ros::ok()) {
         radarPublisherNode.publish();
-        ros_.rate();
+        ros.rate();
         loop_rate.sleep();
     }
     return 0;

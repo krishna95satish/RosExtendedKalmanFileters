@@ -1,20 +1,21 @@
 #include "extendedkalmanfilters/Tools.h"
 
 VectorXd Tools::calculateRMSE(const vector<VectorXd> &estimations,
-                              const vector<VectorXd> &ground_truth) {
+                              const vector<VectorXd> &groundTruth) {
   VectorXd rmse(4);
   rmse << 0,0,0,0;
-  if (estimations.size() != ground_truth.size() || estimations.size() == 0) {
+  if (estimations.size() != groundTruth.size() || estimations.size() == 0) {
     std::cout << "Invalid estimation or ground_truth data" << std::endl;
     return rmse;
   }
-  for (unsigned int i=0; i < estimations.size(); ++i) {
-    VectorXd residual = estimations[i] - ground_truth[i];
+  for (size_t i = 0; i < estimations.size(); ++i) {
+    VectorXd residual = estimations[i] - groundTruth[i];
     residual = residual.array()*residual.array();
     rmse += residual;
   }
   rmse = rmse/estimations.size();
   rmse = rmse.array().sqrt();
+  std::cout << rmse(0) << rmse(1) << rmse(3) << rmse(2) << std::endl;
   return rmse;
 }
 

@@ -8,9 +8,6 @@ project(extendedkalmanfilters)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  cv_bridge
-  image_transport
-  sensor_msgs
   message_generation
   rosbag
   roscpp
@@ -62,6 +59,7 @@ include_directories(${Eigen_INCLUDE_DIRS})
     FusedMesurements.msg
     RadarMeasurements.msg
     LidarMeasurements.msg
+    RMSError.msg
 #   Message2.msg
   )
 
@@ -230,8 +228,12 @@ add_dependencies(RadarPublisher extendedkalmanfilters_generate_messages_cpp )
 #
 add_executable(FusionNode src/Node.cpp src/FusionNode.cpp  src/LidarInput.cpp src/RadarInput.cpp  src/Ros.cpp src/KalmanFilter.cpp src/ExtendedKF.cpp src/Tools.cpp)
 target_link_libraries(FusionNode ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
-add_dependencies(FusionNode extendedkalmanfilters_generate_messages_cpp )
+add_dependencies(FusionNode extendedkalmanfilters_generate_messages_cpp)
 
-add_executable(rosBagCreator src/RosBagCreatorMain.cpp src/RosBagCreator.cpp src/Ros.cpp)
-target_link_libraries(rosBagCreator ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
-add_dependencies(rosBagCreator extendedkalmanfilters_generate_messages_cpp )
+add_executable(OutputNode src/Node.cpp src/LidarInput.cpp src/RadarInput.cpp src/OutputNode.cpp src/Ros.cpp src/Tools.cpp)
+target_link_libraries(OutputNode ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
+add_dependencies(OutputNode extendedkalmanfilters_generate_messages_cpp )
+
+add_executable(RosBagCreator src/RosBagCreatorMain.cpp src/RosBagCreator.cpp src/Ros.cpp)
+target_link_libraries(RosBagCreator ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
+add_dependencies(RosBagCreator extendedkalmanfilters_generate_messages_cpp )

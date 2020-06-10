@@ -1,4 +1,0 @@
-<launch>
-    <node pkg="extendedkalmanfilters" type="LidarPublisher" name="LidarPublisher" output="screen">
-    </node>
-</launch>

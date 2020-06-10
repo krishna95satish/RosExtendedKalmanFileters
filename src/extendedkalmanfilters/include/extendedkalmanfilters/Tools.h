@@ -1,3 +1,5 @@
+// Technische Hochschule Ingolstadt
+
 #ifndef AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_TOOLS_H_
 #define AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_TOOLS_H_
 
@@ -14,7 +16,7 @@ class Tools {
  public:
   Tools() {};
   Eigen::VectorXd calculateRMSE(const std::vector<Eigen::VectorXd> &estimations, 
-                                const std::vector<Eigen::VectorXd> &ground_truth);
+                                const std::vector<Eigen::VectorXd> &groundTruth);
   Eigen::MatrixXd calculateJacobian(const Eigen::VectorXd& x_state);
  virtual ~Tools() {};
 };

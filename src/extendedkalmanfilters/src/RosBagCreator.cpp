@@ -51,7 +51,6 @@ void RosBagCreator :: read() {
 
     } else if (sensor_type == "R") {
 
-      std::cout << "Radar Data" << std::endl;
       std::string s_type;
       long long t;
       float rho, phi, rhodot, x_gt, y_gt, vx_gt, vy_gt;
@@ -114,4 +113,5 @@ void RosBagCreator :: lidarWrite(std::string& s_type, float x_m, float y_m, long
 void RosBagCreator :: close() {
   radarBag.close();
   lidarBag.close();
+  std::cout << "Bag Files Created!!! Please check ROSBagFiles folder" << std::endl;
 }
