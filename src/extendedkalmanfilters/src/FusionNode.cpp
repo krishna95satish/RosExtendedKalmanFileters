@@ -16,6 +16,10 @@ void FusionNode::lidarCallback(const extendedkalmanfilters::LidarMeasurements::C
     measPackage_.rawMeasurements_ = VectorXd(2);
     measPackage_.rawMeasurements_ << lidarMsg->x_measured_, lidarMsg->y_measured_;
     measPackage_.timestamp_ = lidarMsg->time_stamp_;
+    xGt_ = lidarMsg->x_ground_truth_;
+    yGt_ = lidarMsg->y_ground_truth_;
+    VxGt_ = lidarMsg->vx_ground_truth_;
+    VyGt_ = lidarMsg->vy_ground_truth_;
     fuse();
 }
 
@@ -26,6 +30,10 @@ void FusionNode::fuse() {
     fusedFrame_.time_stamp_ = measPackage_.timestamp_;
     fusedFrame_.vx_estimated_ = extendedKF_.kf_.X_(2);
     fusedFrame_.vy_estimated_ = extendedKF_.kf_.X_(3);
+    fusedFrame_.x_gt_ = xGt_;
+    fusedFrame_.y_gt_ = yGt_;
+    fusedFrame_.vx_gt_ = VxGt_;
+    fusedFrame_.vy_gt_ = VyGt_;
     publish();
 }
 
@@ -40,6 +48,10 @@ void FusionNode::radarCallback(const extendedkalmanfilters::RadarMeasurements::C
     measPackage_.rawMeasurements_ = VectorXd(3);
     measPackage_.rawMeasurements_ << radarMsg->rho_measured_, radarMsg->phi_measured_, radarMsg->rhodot_measured_;
     measPackage_.timestamp_ = radarMsg->time_stamp_;
+    xGt_ = radarMsg->x_ground_truth_;
+    yGt_ = radarMsg->y_ground_truth_;
+    VxGt_ = radarMsg->vx_ground_truth_;
+    VyGt_ = radarMsg->vy_ground_truth_;
     fuse();
 }
 

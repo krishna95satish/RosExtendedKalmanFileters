@@ -19,8 +19,6 @@ using Eigen::VectorXd;
 class OutputNode : public Node {
  private:
     ros::NodeHandle node_;
-    ros::Subscriber radarSubscribe_;
-    ros::Subscriber lidarSubscribe_;
     ros::Subscriber fusionSubscribe_;
     vector<VectorXd> estValues_;
     vector<VectorXd> gtValues_;
@@ -33,8 +31,6 @@ class OutputNode : public Node {
     void subscribe();
     void publish();
     void rmsCalulate();
-    void lidarCallback(const extendedkalmanfilters::LidarMeasurements::ConstPtr& lidaraMsg);
-    void radarCallback(const extendedkalmanfilters::RadarMeasurements::ConstPtr& radarMsg);
     void fusionCallback(const extendedkalmanfilters::FusedMesurements::ConstPtr& fusedMsg);
     ~OutputNode() {}
 };

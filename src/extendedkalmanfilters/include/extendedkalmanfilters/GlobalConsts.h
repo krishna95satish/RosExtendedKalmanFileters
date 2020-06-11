@@ -5,8 +5,8 @@
 
 #include "Include.h"
 const int gFrameReset = 0;
-const int gQueueSize = 100;
-const int gPublisherBaudRate  = 10;
+const int gQueueSize = 500;
+const int gPublisherBaudRate  = 5;
 constexpr char const* gRadarPublisherNode = "RadarNode";
 constexpr char const* gLidarPublisherNode = "LidarNode";
 constexpr char const* gOutputNode = "OutputNode";

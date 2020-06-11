@@ -22,6 +22,7 @@ class FusionNode : public Node {
     ros::NodeHandle node_;
     ros::Subscriber radarSubscribe_;
     ros::Subscriber lidarSubscribe_;
+    double xGt_, yGt_, VxGt_, VyGt_;
     ExtendedKF extendedKF_;
     Tools tools_;
     MeasurementPackage measPackage_;
