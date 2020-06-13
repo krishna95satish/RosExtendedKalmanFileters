@@ -8,11 +8,11 @@
 #include "Eigen/Dense"
 #include "KalmanFilter.h"
 #include "MeasurementPackage.h"
-#include "Tools.h"
+#include "Helper.h"
 
 class ExtendedKF {
  public:
-  Tools tools_;
+  Helper helper_;
   Eigen::MatrixXd R_laser_;
   Eigen::MatrixXd R_radar_;
   Eigen::MatrixXd H_laser_;

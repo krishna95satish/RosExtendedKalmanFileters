@@ -35,8 +35,10 @@ void OutputNode::publish() {
     rmsErrPublish_.publish(RMSError_);
 }
 
+
+
 void OutputNode::rmsCalulate() {
-    rmsErValues_ = tools_.calculateRMSE(estValues_, gtValues_);
+    rmsErValues_ = helper_.calculateRMSE(estValues_, gtValues_);
     RMSError_.x_err_ = rmsErValues_(0);
     RMSError_.y_err_ = rmsErValues_(1);
     RMSError_.vx_err_ = rmsErValues_(2);

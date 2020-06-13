@@ -1,13 +1,13 @@
-#include "extendedkalmanfilters/Tools.h"
+#include "extendedkalmanfilters/Helper.h"
 
-VectorXd Tools::calculateRMSE(const vector<VectorXd> &estimations,
+VectorXd Helper::calculateRMSE(const vector<VectorXd> &estimations,
                               const vector<VectorXd> &groundTruth) {
   VectorXd rmse(4);
   rmse << 0,0,0,0;
   std::cout << "SizeEst:" << estimations.size() << "SizeGt:" << groundTruth.size() << std::endl;
   if (estimations.size() != groundTruth.size() || estimations.size() == 0) {
-    //std::cout << "Invalid estimation or ground_truth data" << std::endl;
-    //return rmse;
+    std::cout << "Invalid estimation or ground_truth data" << std::endl;
+    return rmse;
   }
   for (size_t i = 0; i < estimations.size(); ++i) {
     VectorXd residual = estimations[i] - groundTruth[i];
@@ -19,7 +19,7 @@ VectorXd Tools::calculateRMSE(const vector<VectorXd> &estimations,
   return rmse;
 }
 
-MatrixXd Tools::calculateJacobian(const VectorXd& x_state) {
+MatrixXd Helper::calculateJacobian(const VectorXd& x_state) {
   MatrixXd Hj(3,4);
   float px = x_state(0);
   float py = x_state(1);

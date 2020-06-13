@@ -9,7 +9,7 @@
 #include "extendedkalmanfilters/LidarMeasurements.h"
 #include "extendedkalmanfilters/RadarMeasurements.h"
 #include "extendedkalmanfilters/RMSError.h"
-#include "Tools.h"
+#include "Helper.h"
 #include "GlobalConsts.h"
 #include "Ros.h"
 
@@ -23,7 +23,7 @@ class OutputNode : public Node {
     vector<VectorXd> estValues_;
     vector<VectorXd> gtValues_;
     VectorXd rmsErValues_;
-    Tools tools_;
+    Helper helper_;
     extendedkalmanfilters::RMSError RMSError_;
 
  public:

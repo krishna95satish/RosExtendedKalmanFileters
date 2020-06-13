@@ -75,7 +75,7 @@ void ExtendedKF::processMeasurement(const MeasurementPackage& measurementPkg) {
                   0, pow(dt,3.0)*nay/2, 0, pow(dt,2.0)*nay;
   kf_.predict();
   if (measurementPkg.sensor_type_ == MeasurementPackage::RADAR) {
-    Hj_ = tools_.calculateJacobian(kf_.X_);
+    Hj_ = helper_.calculateJacobian(kf_.X_);
     kf_.updateEKF(measurementPkg.rawMeasurements_, Hj_);
     std::cout << "Update by EKF is Done!" << std::endl;
   } else {

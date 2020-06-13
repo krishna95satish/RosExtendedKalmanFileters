@@ -8,7 +8,6 @@
 #include "Node.h"
 #include "extendedkalmanfilters/LidarMeasurements.h"
 #include "extendedkalmanfilters/RadarMeasurements.h"
-#include "Tools.h"
 #include "ExtendedKF.h"
 #include "MeasurementPackage.h"
 #include "GlobalConsts.h"
@@ -24,7 +23,6 @@ class FusionNode : public Node {
     ros::Subscriber lidarSubscribe_;
     double xGt_, yGt_, VxGt_, VyGt_;
     ExtendedKF extendedKF_;
-    Tools tools_;
     MeasurementPackage measPackage_;
     extendedkalmanfilters::FusedMesurements fusedFrame_;
 
