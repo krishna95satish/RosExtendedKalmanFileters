@@ -22,6 +22,8 @@ constexpr char const* gLidarTopic = "/lidar";
 constexpr char const* gRadarBagName = "radar";
 constexpr char const* gLidarBagName = "lidar";
 constexpr char const* gArgument = "readCSV";
+constexpr char const* gVizMarkerName = "/my_frame";
+constexpr char const* gVizNameSpace = "points_and_lines";
 #define gLidarNodeFile "/home/krishna/AVMLCodingHere/AvmlEkfWs/ROSBagFiles/Lidar.bag"
 #define gRadarNodeFile "/home/krishna/AVMLCodingHere/AvmlEkfWs/ROSBagFiles/Radar.bag"
 constexpr char const* RadarDataFile = "../AvmlEkfWs/InputFiles/SensorData.csv";

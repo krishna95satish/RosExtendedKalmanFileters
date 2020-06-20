@@ -237,3 +237,7 @@ add_dependencies(OutputNode extendedkalmanfilters_generate_messages_cpp )
 add_executable(RosBagCreator src/RosBagCreatorMain.cpp src/RosBagCreator.cpp src/Ros.cpp)
 target_link_libraries(RosBagCreator ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
 add_dependencies(RosBagCreator extendedkalmanfilters_generate_messages_cpp )
+
+add_executable(Visualization src/Visualization.cpp)
+target_link_libraries(Visualization ${catkin_LIBRARIES})
+

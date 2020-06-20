@@ -12,8 +12,8 @@ ExtendedKF::ExtendedKF() {
   H_laser_ = MatrixXd(2, 4);
   Hj_ = MatrixXd(3, 4);
 
-  R_laser_ << 0.0225, 0,
-              0, 0.0225;
+  R_laser_ << 0.0255, 0,
+              0, 0.0255;
 
   R_radar_ << 0.09, 0, 0,
               0, 0.0009, 0,
@@ -26,7 +26,6 @@ ExtendedKF::ExtendedKF() {
 void ExtendedKF::processMeasurement(const MeasurementPackage& measurementPkg) {
 
   if (!is_initialized_) {
-    // first measurement
     kf_.X_ = VectorXd(4);
     kf_.X_ << 1, 1, 1, 1;
     MatrixXd PCovar = MatrixXd(4,4);

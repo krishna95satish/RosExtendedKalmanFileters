@@ -7,5 +7,6 @@
    </node>
    <node pkg="extendedkalmanfilters" type="OutputNode" name="OutputNode" output="screen">
    </node>
+   <node type="rviz" name="rviz" pkg="rviz" args="-d /home/krishna/AVMLCodingHere/AvmlEkfWs/src/extendedkalmanfilters/rviz/config_file.rviz" />
 
 </launch>
