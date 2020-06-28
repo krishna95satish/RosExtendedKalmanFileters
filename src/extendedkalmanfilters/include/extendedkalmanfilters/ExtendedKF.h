@@ -10,6 +10,9 @@
 #include "MeasurementPackage.h"
 #include "Helper.h"
 
+using Eigen::MatrixXd;
+using Eigen::VectorXd;
+
 class ExtendedKF {
  public:
   Helper helper_;
@@ -20,12 +23,12 @@ class ExtendedKF {
   KalmanFilter kf_;
 
 private:
-  bool is_initialized_;
-  long long previous_timestamp_;
+  bool isInitialized_;
+  long long previousTimestamp_;
 
 public:
   ExtendedKF();
-  void processMeasurement(const MeasurementPackage &measurement_pack);
+  void processMeasurement(const MeasurementPackage &measurementPack);
   virtual ~ExtendedKF() {};
  
 };

@@ -17,12 +17,11 @@ void LidarPublisherNode::getData() {
 }
 
 void LidarPublisherNode::publish() {
-    //ROS_INFO("Publishing Lidar Data");
     if (lidarMsgCounter_ != length()) {
         lidarPublish_.publish(tempLidarData_[lidarMsgCounter_]);
         nextFrame();
     } else {
-        repeatTransmission();
+        return;
     }
 }
 
@@ -35,9 +34,6 @@ void LidarPublisherNode::nextFrame() {
     lidarMsgCounter_++;
 }
 
-void LidarPublisherNode::repeatTransmission() {
-    lidarMsgCounter_ = gFrameReset;
-}
 
 
 int main(int argc, char** argv) {

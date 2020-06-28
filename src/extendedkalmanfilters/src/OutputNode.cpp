@@ -4,15 +4,12 @@
 
 
 OutputNode::OutputNode() {
-
    rmsErrPublish_ = outputNode_.advertise<extendedkalmanfilters::RMSError>(gRmsErrorMsgname, gQueueSize);
-   pub = outputNode_.advertise<geometry_msgs::Twist>("turtle1/cmd_vel", 1000);
-   marker_pub = n.advertise<visualization_msgs::Marker>("visualization", 100, true);
+   markerPublish = node_.advertise<visualization_msgs::Marker>(gVizMsgname, gQueueSize);
 }
 
 void OutputNode::subscribe() {
     fusionSubscribe_ = fusionNode_.subscribe(gFusionMsgname, gQueueSize, &OutputNode::fusionCallback, this);
-    
 }
 
 
@@ -29,7 +26,6 @@ void OutputNode::fusionCallback(const extendedkalmanfilters::FusedMesurements::C
     gtValue_(3) = fusedMsg->vy_gt_;
     estValues_.push_back(estValue_);
     gtValues_.push_back(gtValue_);
-
     visualize(estValue_,gtValue_);
     rmsCalulate();
     
@@ -37,20 +33,20 @@ void OutputNode::fusionCallback(const extendedkalmanfilters::FusedMesurements::C
 
 void OutputNode::visualize(VectorXd& estValue,VectorXd& gtValue) {
 
-    gtPoint_.header.frame_id = EstPoint_.header.frame_id  = gVizMarkerName;
-    gtPoint_.header.stamp = EstPoint_.header.stamp = ros::Time::now();
-    EstPoint_.ns =  gtPoint_.ns  = gVizNameSpace;
-    gtPoint_.action  =  EstPoint_.action  = visualization_msgs::Marker::ADD;
-    gtPoint_.pose.orientation.w = EstPoint_.pose.orientation.w = 1.0;
+    gtPoint_.header.frame_id = estPoint_.header.frame_id  = gVizMarkerName;
+    gtPoint_.header.stamp = estPoint_.header.stamp = ros::Time::now();
+    estPoint_.ns =  gtPoint_.ns  = gVizNameSpace;
+    gtPoint_.action  =  estPoint_.action  = visualization_msgs::Marker::ADD;
+    gtPoint_.pose.orientation.w = estPoint_.pose.orientation.w = 1.0;
     gtPoint_.id = 0;
-    EstPoint_.id = 1;
+    estPoint_.id = 1;
     gtPoint_.type = visualization_msgs::Marker::LINE_STRIP;
-    EstPoint_.type = visualization_msgs::Marker::LINE_STRIP;
-    gtPoint_.scale.x = EstPoint_.scale.x = 0.2;
-    gtPoint_.scale.y = EstPoint_.scale.y  = 0.1;
+    estPoint_.type = visualization_msgs::Marker::LINE_STRIP;
+    gtPoint_.scale.x = estPoint_.scale.x = 0.2;
+    gtPoint_.scale.y = estPoint_.scale.y  = 0.1;
     gtPoint_.color.g = 1.0f;
-    EstPoint_.color.r = 1.0f;
-    gtPoint_.color.a = EstPoint_.color.a = 1.0;
+    estPoint_.color.r = 1.0f;
+    gtPoint_.color.a = estPoint_.color.a = 1.0;
 
     gtP_.x = gtValue(0);
     gtP_.y = gtValue(1);
@@ -61,17 +57,14 @@ void OutputNode::visualize(VectorXd& estValue,VectorXd& gtValue) {
     estP_.z = 0.0 ;
 
     gtPoint_.points.push_back(gtP_);
-    EstPoint_.points.push_back(estP_);
+    estPoint_.points.push_back(estP_);
 }
 
 
 void OutputNode::publish() {
-   //ROS_INFO("Publishing RMS Error.....");
-
-    marker_pub.publish(gtPoint_);
-    marker_pub.publish(EstPoint_);
+    markerPublish.publish(gtPoint_);
+    markerPublish.publish(estPoint_);
     rmsErrPublish_.publish(RMSError_);
-    pub.publish(twistMsg_);
 }
 
 
@@ -79,12 +72,9 @@ void OutputNode::publish() {
 void OutputNode::rmsCalulate() {
     rmsErValues_ = helper_.calculateRMSE(estValues_, gtValues_);
     RMSError_.x_err_ = rmsErValues_(0);
-    twistMsg_.linear.x = rmsErValues_(0);
     RMSError_.y_err_ = rmsErValues_(1);
-    //twistMsg_.linear.y = rmsErValues_(0);
     RMSError_.vx_err_ = rmsErValues_(2);
     RMSError_.vy_err_ = rmsErValues_(3);
-
     publish();
 }
 

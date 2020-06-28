@@ -13,6 +13,7 @@ constexpr char const* gOutputNode = "OutputNode";
 constexpr char const* gFusionNode = "FusionNode";
 constexpr char const* gRadarMsgname = "RadarMsg";
 constexpr char const* gLidarMsgname = "LidarMsg";
+constexpr char const* gVizMsgname = "visualization";
 constexpr char const* gRmsErrorMsgname = "RMSErrorMsg";
 constexpr char const* gFusionMsgname = "FusedMsg";
 constexpr char const* gRadarBag = "ROSBagFiles/Radar.bag";
@@ -22,7 +23,7 @@ constexpr char const* gLidarTopic = "/lidar";
 constexpr char const* gRadarBagName = "radar";
 constexpr char const* gLidarBagName = "lidar";
 constexpr char const* gArgument = "readCSV";
-constexpr char const* gVizMarkerName = "/my_frame";
+constexpr char const* gVizMarkerName = "/rvizFrame";
 constexpr char const* gVizNameSpace = "points_and_lines";
 #define gLidarNodeFile "/home/krishna/AVMLCodingHere/AvmlEkfWs/ROSBagFiles/Lidar.bag"
 #define gRadarNodeFile "/home/krishna/AVMLCodingHere/AvmlEkfWs/ROSBagFiles/Radar.bag"

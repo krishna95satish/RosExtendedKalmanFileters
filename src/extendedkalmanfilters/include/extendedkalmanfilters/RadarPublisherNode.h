@@ -15,7 +15,6 @@ class RadarPublisherNode : public Node {
     explicit RadarPublisherNode(const std::string& fileName);
     void getData();
     void publish();
-    void repeatTransmission();
     int length();
     void nextFrame();
     ~RadarPublisherNode(){}

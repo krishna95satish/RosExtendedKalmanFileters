@@ -3,17 +3,11 @@
 #ifndef AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_RADARINPUT_H_
 #define AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_RADARINPUT_H_
 
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <string>
 #include "Input.h"
-#include "ros/ros.h"
 
 class RadarInput : public Input {
  private:
-    RadarInput() {}
-    static RadarInput *RadarInputptr;
+    static RadarInput *radarInputptr_;
 
  protected:
     rosbag::Bag bag_;
@@ -24,6 +18,7 @@ class RadarInput : public Input {
     bool statusFlag_;
 
  public:
+    RadarInput() {};
     void setFileName(const std::string& fname);
     bool open();
     void close();

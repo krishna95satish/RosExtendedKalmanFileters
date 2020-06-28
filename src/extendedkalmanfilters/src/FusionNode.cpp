@@ -38,7 +38,6 @@ void FusionNode::fuse() {
 }
 
 void FusionNode::publish() {
-   // ROS_INFO("Publishing Fused Data");
     fusionPublish_.publish(fusedFrame_);
 }
 

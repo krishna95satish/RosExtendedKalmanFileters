@@ -234,10 +234,7 @@ add_executable(OutputNode src/Node.cpp src/LidarInput.cpp src/RadarInput.cpp src
 target_link_libraries(OutputNode ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
 add_dependencies(OutputNode extendedkalmanfilters_generate_messages_cpp )
 
-add_executable(RosBagCreator src/RosBagCreatorMain.cpp src/RosBagCreator.cpp src/Ros.cpp)
+add_executable(RosBagCreator src/RosBagCreator.cpp src/Ros.cpp)
 target_link_libraries(RosBagCreator ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
 add_dependencies(RosBagCreator extendedkalmanfilters_generate_messages_cpp )
-
-add_executable(Visualization src/Visualization.cpp)
-target_link_libraries(Visualization ${catkin_LIBRARIES})
 

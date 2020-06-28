@@ -3,14 +3,13 @@
 #ifndef AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_LidarInput_H_
 #define AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_LidarInput_H_
 
-#include <string>
-#include <vector>
 #include "Input.h"
 
 class LidarInput : public Input {
  private:
     LidarInput() {}
     static LidarInput *lidarInputptr_;
+    
  protected:
     std::string fileName_;
     extendedkalmanfilters::LidarMeasurements::ConstPtr lidarFrame_;

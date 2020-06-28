@@ -22,7 +22,6 @@ class LidarPublisherNode : public Node {
     void publish();
     void nextFrame();
     int length();
-    void repeatTransmission();
     void close();
     ~LidarPublisherNode(){}
 };

@@ -7,6 +7,7 @@
 #include <rosbag/view.h>
 #include <ros/ros.h>
 #include <iostream>
+#include <rosbag/bag.h>
 #include <string>
 #include <vector>
 #include <cmath>

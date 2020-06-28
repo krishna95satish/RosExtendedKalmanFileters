@@ -1,4 +1,4 @@
-// Copyright 2019 KPIT  [legal/copyright]
+// Technische Hochschule Ingolstadt
 
 #include "extendedkalmanfilters/LidarInput.h"
 

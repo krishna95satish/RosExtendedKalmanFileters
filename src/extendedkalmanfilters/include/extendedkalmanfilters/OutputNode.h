@@ -7,10 +7,6 @@
 #include <visualization_msgs/Marker.h>
 #include <Eigen/Eigen>
 #include "Node.h"
-#include "extendedkalmanfilters/LidarMeasurements.h"
-#include "extendedkalmanfilters/RadarMeasurements.h"
-#include "extendedkalmanfilters/RMSError.h"
-#include <geometry_msgs/Twist.h>
 #include "Helper.h"
 #include "GlobalConsts.h"
 #include "Ros.h"
@@ -21,16 +17,12 @@ using Eigen::VectorXd;
 class OutputNode : public Node {
  private:
     ros::NodeHandle node_;
-       ros::NodeHandle n;
-   ros::Publisher marker_pub;
+    ros::Publisher markerPublish;
     ros::Subscriber fusionSubscribe_;
-    geometry_msgs::Twist twistMsg_;
-
     vector<VectorXd> estValues_;
     geometry_msgs::Point gtP_,estP_;
-    visualization_msgs::Marker gtPoint_,EstPoint_;
+    visualization_msgs::Marker gtPoint_,estPoint_;
     vector<VectorXd> gtValues_;
-    ros::Publisher pub;
     VectorXd rmsErValues_;
     Helper helper_;
     extendedkalmanfilters::RMSError RMSError_;

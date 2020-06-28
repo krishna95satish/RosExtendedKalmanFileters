@@ -19,12 +19,11 @@ void RadarPublisherNode::getData() {
 }
 
 void RadarPublisherNode::publish() {
-    //ROS_INFO("Publishing Radar Data");
     if (radarMsgCounter_ != length()) {
         radarPublish_.publish(tempRadarData_[radarMsgCounter_]);
         nextFrame();
     } else {
-        repeatTransmission();
+        return;
     }
 }
 
@@ -37,9 +36,6 @@ void RadarPublisherNode::nextFrame() {
     radarMsgCounter_++;
 }
 
-void RadarPublisherNode::repeatTransmission() {
-    radarMsgCounter_ = gFrameReset;
-}
 
 int main(int argc, char** argv) {
     Ros ros;

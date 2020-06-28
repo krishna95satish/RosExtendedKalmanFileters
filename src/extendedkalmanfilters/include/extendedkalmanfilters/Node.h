@@ -3,15 +3,13 @@
 #ifndef CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_NODE_H_
 #define CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_NODE_H_
 
-#include <ros/ros.h>
-#include <string>
-#include <vector>
 #include "Input.h"
 #include "GlobalConsts.h"
 #include "Ros.h"
 #include "LidarInput.h"
 #include "RadarInput.h"
 #include "Include.h"
+#include "extendedkalmanfilters/RMSError.h"
 
 
 class Node {

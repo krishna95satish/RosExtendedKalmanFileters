@@ -1,11 +1,12 @@
-// Copyright 2019 KPIT  [legal/copyright]
+// Technische Hochschule Ingolstadt
+
 #include "extendedkalmanfilters/RadarInput.h"
 
 void RadarInput::setFileName(const std::string& fname) {
     fileName_ = fname;
 }
 
-RadarInput* RadarInput::RadarInputptr = NULL;
+RadarInput* RadarInput::radarInputptr_ = NULL;
 
 bool RadarInput::open() {
     try {
@@ -20,10 +21,10 @@ bool RadarInput::open() {
 }
 
 RadarInput* RadarInput::newinstance() {
-    if (RadarInputptr == NULL) {
-        RadarInputptr = new RadarInput;
+    if (radarInputptr_ == NULL) {
+        radarInputptr_ = new RadarInput;
     }
-    return RadarInputptr;
+    return radarInputptr_;
 }
 
 void RadarInput::read(const std::string& topicNameInRosBag) {
@@ -46,5 +47,5 @@ void RadarInput::close() {
 }
 
 RadarInput::~RadarInput() {
-    delete(RadarInputptr);
+    delete(radarInputptr_);
 }
