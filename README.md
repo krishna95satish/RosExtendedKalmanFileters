@@ -17,9 +17,12 @@ Please follow these below mentioned setps to run this code,
               2. rostopic echo /FusedMsg (you can see the fused data)
               3. rostopic echo /LidarMsg (you can see the publised raw Lidar Data)
               4. rostopic echo /RadarMsg (you can see the publised raw Radar Data)
+*  You can find the RQT_Graph of this project inside "RQT_Graphs" folder 
 
 
 Note: As soon as you launch the code, everyone will be launched automatically and RVIZ should open up soon and you can visulaize the estimation,
       Red line represents the estimated values.
       Green line represents the ground truth values.
+
+
 Thank you :)
