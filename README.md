@@ -1,5 +1,7 @@
 # RosExtendedKalmanFileters
 
+NOTE: THIS PROJECT WAS COMPILED ON ROS MELODIC AND UBUNTU 18.04LTS
+
 Please follow these below mentioned setps to run this code,
 
 *  Delete the contents of "ROSBagFiles" folder (it will be automatically populated once you run the code).
