@@ -27,7 +27,6 @@ void RadarPublisherNode::publish() {
     }
 }
 
-
 int RadarPublisherNode::length() {
     return(tempRadarData_.size());
 }
@@ -35,7 +34,6 @@ int RadarPublisherNode::length() {
 void RadarPublisherNode::nextFrame() {
     radarMsgCounter_++;
 }
-
 
 int main(int argc, char** argv) {
     Ros ros;

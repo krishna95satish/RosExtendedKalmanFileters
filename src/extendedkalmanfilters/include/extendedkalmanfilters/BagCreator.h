@@ -4,7 +4,6 @@
 #define AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_BAGCREATOR_H_
 
 #include "GlobalConsts.h"
-#include "Include.h"
 
 class BagCreator {
  public:

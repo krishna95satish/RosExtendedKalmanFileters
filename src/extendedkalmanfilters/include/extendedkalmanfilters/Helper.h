@@ -14,6 +14,13 @@ using std::vector;
 
 class Helper {
  public:
+    enum SensorType{
+        LASER,
+        RADAR
+  } sensorType_;
+  long long timeStamp_;
+  Eigen::VectorXd rawMeasurements_;
+public:
   Helper() {};
   Eigen::VectorXd calculateRMSE(const std::vector<Eigen::VectorXd> &estimations, 
                                 const std::vector<Eigen::VectorXd> &groundTruth);

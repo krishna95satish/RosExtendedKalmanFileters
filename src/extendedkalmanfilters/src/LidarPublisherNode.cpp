@@ -34,8 +34,6 @@ void LidarPublisherNode::nextFrame() {
     lidarMsgCounter_++;
 }
 
-
-
 int main(int argc, char** argv) {
     Ros ros;
     ros.initialize(argc, argv, gLidarPublisherNode);

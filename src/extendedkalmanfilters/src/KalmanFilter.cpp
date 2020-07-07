@@ -38,7 +38,7 @@ void KalmanFilter::updateEKF(const VectorXd &Z,const MatrixXd &Hj) {
   float rho = sqrt(X_(0) * X_(0) + X_(1) * X_(1));
   float phi = atan2(X_(1), X_(0));
   float rho_dot;
-  if (fabs(rho) < 0.0001) {
+  if (fabs(rho) < 0.0001) {                            // Checking for division by Zero (Issue Fixed)
     rho_dot = 0;
   } else {
     rho_dot = (X_(0)*X_(2) + X_(1)*X_(3))/rho;
@@ -46,7 +46,7 @@ void KalmanFilter::updateEKF(const VectorXd &Z,const MatrixXd &Hj) {
   VectorXd Zpred(3);
   Zpred << rho, phi, rho_dot;
   VectorXd Y = Z - Zpred;
-  while ( Y(1) > M_PI || Y(1) < -M_PI ) {
+  while ( Y(1) > M_PI || Y(1) < -M_PI ) {              // Limits Verification
     if ( Y(1) > M_PI ) {
       Y(1) -= 2*M_PI;
     } else {

@@ -6,12 +6,10 @@
 #include <string>
 #include <Eigen/Eigen>
 #include "Node.h"
-#include "extendedkalmanfilters/LidarMeasurements.h"
-#include "extendedkalmanfilters/RadarMeasurements.h"
 #include "ExtendedKF.h"
-#include "MeasurementPackage.h"
 #include "GlobalConsts.h"
 #include "Ros.h"
+#include "Helper.h"
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
@@ -23,7 +21,7 @@ class FusionNode : public Node {
     ros::Subscriber lidarSubscribe_;
     double xGt_, yGt_, VxGt_, VyGt_;
     ExtendedKF extendedKF_;
-    MeasurementPackage measPackage_;
+    Helper helperObject_;
     extendedkalmanfilters::FusedMesurements fusedFrame_;
 
  public:

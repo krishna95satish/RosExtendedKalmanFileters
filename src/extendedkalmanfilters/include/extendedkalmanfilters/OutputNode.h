@@ -3,13 +3,9 @@
 #ifndef AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_OUTPUTNODE_H_
 #define AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_OUTPUTNODE_H_
 
-#include <string>
-#include <visualization_msgs/Marker.h>
-#include <Eigen/Eigen>
+
 #include "Node.h"
 #include "Helper.h"
-#include "GlobalConsts.h"
-#include "Ros.h"
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;

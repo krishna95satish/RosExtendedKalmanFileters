@@ -24,7 +24,6 @@ void RosBagCreator :: read() {
     std::stringstream string(line);
     std::getline(string, sensor_type, ',');
     if (sensor_type == "L") {
-
       std::string sensorType;
       long long timeStamp;
       float xMeasured, yMeasured, xGt, y_gt, vxGt, vyGt;
@@ -48,7 +47,6 @@ void RosBagCreator :: read() {
       lidarWrite(sensorType, xMeasured, yMeasured, timeStamp, xGt, y_gt, vxGt, vyGt);
 
     } else if (sensor_type == "R") {
-
       std::string sensorType;
       long long timeStamp;
       float rho, phi, rhodot, xGt, y_gt, vxGt, vyGt;
@@ -72,7 +70,6 @@ void RosBagCreator :: read() {
       vxGt = atof(vx_ground_truth.c_str());
       vyGt = atof(vy_ground_truth.c_str());
       radarWrite(sensorType, rho, phi, rhodot, timeStamp, xGt, y_gt, vxGt, vyGt);
-
     } else {
       std::cout << "Unknown Data!! exiting" << std::endl;
       break;

@@ -4,9 +4,19 @@
 #define CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_GLOBALCONSTS_H_
 
 #include "Include.h"
+// ****************************************************************************** //
+//    ********* Configuration Begin ********* //
 const int gFrameReset = 0;
 const int gQueueSize = 500;
-const int gPublisherBaudRate  = 5;
+const int gPublisherBaudRate  = 10;
+//    ********* Configuration End ********* //
+// ****************************************************************************** //
+//    ********* Bag File Path Begin ********* //
+#define gLidarNodeFile "/home/krishna/AVMLCodingHere/AvmlEkfWs/ROSBagFiles/Lidar.bag"
+#define gRadarNodeFile "/home/krishna/AVMLCodingHere/AvmlEkfWs/ROSBagFiles/Radar.bag"
+//    ********* Bag File Path End ********* //
+// ****************************************************************************** //
+//    ********* Global Constants Begin ********* //
 constexpr char const* gRadarPublisherNode = "RadarNode";
 constexpr char const* gLidarPublisherNode = "LidarNode";
 constexpr char const* gOutputNode = "OutputNode";
@@ -25,9 +35,8 @@ constexpr char const* gLidarBagName = "lidar";
 constexpr char const* gArgument = "readCSV";
 constexpr char const* gVizMarkerName = "/rvizFrame";
 constexpr char const* gVizNameSpace = "points_and_lines";
-#define gLidarNodeFile "/home/krishna/AVMLCodingHere/AvmlEkfWs/ROSBagFiles/Lidar.bag"
-#define gRadarNodeFile "/home/krishna/AVMLCodingHere/AvmlEkfWs/ROSBagFiles/Radar.bag"
 constexpr char const* RadarDataFile = "../AvmlEkfWs/InputFiles/SensorData.csv";
 constexpr char const* gRadarTopicname = "/RadarData";
-
+//    ********* Global Constants End ********* //
+// ****************************************************************************** //
 #endif  // CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_GLOBALCONSTS_H_

@@ -12,10 +12,10 @@ void FusionNode::subscribe() {
 }
 
 void FusionNode::lidarCallback(const extendedkalmanfilters::LidarMeasurements::ConstPtr& lidarMsg) {
-    measPackage_.sensor_type_ = MeasurementPackage::LASER;
-    measPackage_.rawMeasurements_ = VectorXd(2);
-    measPackage_.rawMeasurements_ << lidarMsg->x_measured_, lidarMsg->y_measured_;
-    measPackage_.timestamp_ = lidarMsg->time_stamp_;
+    helperObject_.sensorType_ = Helper::LASER;
+    helperObject_.rawMeasurements_ = VectorXd(2);
+    helperObject_.rawMeasurements_ << lidarMsg->x_measured_, lidarMsg->y_measured_;
+    helperObject_.timeStamp_ = lidarMsg->time_stamp_;
     xGt_ = lidarMsg->x_ground_truth_;
     yGt_ = lidarMsg->y_ground_truth_;
     VxGt_ = lidarMsg->vx_ground_truth_;
@@ -24,10 +24,10 @@ void FusionNode::lidarCallback(const extendedkalmanfilters::LidarMeasurements::C
 }
 
 void FusionNode::fuse() {
-    extendedKF_.processMeasurement(measPackage_);
+    extendedKF_.processMeasurement(helperObject_);
     fusedFrame_.x_estimated_ = extendedKF_.kf_.X_(0);
     fusedFrame_.y_estimated_ = extendedKF_.kf_.X_(1);
-    fusedFrame_.time_stamp_ = measPackage_.timestamp_;
+    fusedFrame_.time_stamp_ = helperObject_.timeStamp_;
     fusedFrame_.vx_estimated_ = extendedKF_.kf_.X_(2);
     fusedFrame_.vy_estimated_ = extendedKF_.kf_.X_(3);
     fusedFrame_.x_gt_ = xGt_;
@@ -43,10 +43,10 @@ void FusionNode::publish() {
 
 
 void FusionNode::radarCallback(const extendedkalmanfilters::RadarMeasurements::ConstPtr& radarMsg) {
-    measPackage_.sensor_type_ = MeasurementPackage::RADAR;
-    measPackage_.rawMeasurements_ = VectorXd(3);
-    measPackage_.rawMeasurements_ << radarMsg->rho_measured_, radarMsg->phi_measured_, radarMsg->rhodot_measured_;
-    measPackage_.timestamp_ = radarMsg->time_stamp_;
+    helperObject_.sensorType_ = Helper::RADAR;
+    helperObject_.rawMeasurements_ = VectorXd(3);
+    helperObject_.rawMeasurements_ << radarMsg->rho_measured_, radarMsg->phi_measured_, radarMsg->rhodot_measured_;
+    helperObject_.timeStamp_ = radarMsg->time_stamp_;
     xGt_ = radarMsg->x_ground_truth_;
     yGt_ = radarMsg->y_ground_truth_;
     VxGt_ = radarMsg->vx_ground_truth_;

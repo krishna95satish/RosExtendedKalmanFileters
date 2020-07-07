@@ -12,7 +12,6 @@ void OutputNode::subscribe() {
     fusionSubscribe_ = fusionNode_.subscribe(gFusionMsgname, gQueueSize, &OutputNode::fusionCallback, this);
 }
 
-
 void OutputNode::fusionCallback(const extendedkalmanfilters::FusedMesurements::ConstPtr& fusedMsg) {
     VectorXd estValue_(4);
     VectorXd gtValue_(4);
@@ -30,6 +29,7 @@ void OutputNode::fusionCallback(const extendedkalmanfilters::FusedMesurements::C
     rmsCalulate();
     
 }
+
 
 void OutputNode::visualize(VectorXd& estValue,VectorXd& gtValue) {
 
@@ -60,14 +60,11 @@ void OutputNode::visualize(VectorXd& estValue,VectorXd& gtValue) {
     estPoint_.points.push_back(estP_);
 }
 
-
 void OutputNode::publish() {
     markerPublish.publish(gtPoint_);
     markerPublish.publish(estPoint_);
     rmsErrPublish_.publish(RMSError_);
 }
-
-
 
 void OutputNode::rmsCalulate() {
     rmsErValues_ = helper_.calculateRMSE(estValues_, gtValues_);

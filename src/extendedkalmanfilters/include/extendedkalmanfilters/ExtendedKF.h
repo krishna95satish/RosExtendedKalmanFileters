@@ -7,7 +7,6 @@
 #include <iostream>
 #include "Eigen/Dense"
 #include "KalmanFilter.h"
-#include "MeasurementPackage.h"
 #include "Helper.h"
 
 using Eigen::MatrixXd;
@@ -28,7 +27,7 @@ private:
 
 public:
   ExtendedKF();
-  void processMeasurement(const MeasurementPackage &measurementPack);
+  void processMeasurement(const Helper &helperObject);
   virtual ~ExtendedKF() {};
  
 };

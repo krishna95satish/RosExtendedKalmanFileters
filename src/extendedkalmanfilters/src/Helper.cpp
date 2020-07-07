@@ -4,7 +4,6 @@ VectorXd Helper::calculateRMSE(const vector<VectorXd> &estimations,
                               const vector<VectorXd> &groundTruth) {
   VectorXd rmse(4);
   rmse << 0,0,0,0;
-  std::cout << "SizeEst:" << estimations.size() << "SizeGt:" << groundTruth.size() << std::endl;
   if (estimations.size() != groundTruth.size() || estimations.size() == 0) {
     std::cout << "Invalid estimation or ground_truth data" << std::endl;
     return rmse;

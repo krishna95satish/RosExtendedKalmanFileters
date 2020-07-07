@@ -1,14 +1,10 @@
 // Technische Hochschule Ingolstadt
 
-#ifndef AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_LidarPublisherNode_H_
-#define AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_LidarPublisherNode_H_
+#ifndef AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_LiDARPublisherNode_H_
+#define AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_LiDARPublisherNode_H_
 
-#include <vector>
-#include <string>
-#include "LidarInput.h"
+
 #include "Node.h"
-#include "GlobalConsts.h"
-#include "Ros.h"
 
 class LidarPublisherNode : public Node {
  private:
@@ -26,4 +22,4 @@ class LidarPublisherNode : public Node {
     ~LidarPublisherNode(){}
 };
 
-#endif  // AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_LidarPublisherNode_H_
+#endif  // AVML_SRC_EXTENDEDKALMANFILTERS_INCLUDE_EXTENDEDKALMANFILTERS_LiDARPublisherNode_H_
