@@ -14,7 +14,7 @@ const int gPublisherBaudRate  = 10;
 //    ********* Bag File Path Begin ********* //
 #define gLidarNodeFile "/home/krishna/AVMLCodingHere/AvmlEkfWs/ROSBagFiles/Lidar.bag"
 #define gRadarNodeFile "/home/krishna/AVMLCodingHere/AvmlEkfWs/ROSBagFiles/Radar.bag"
-constexpr char const* RadarDataFile = "../AvmlEkfWs/InputFiles/SensorData.csv";
+constexpr char const* DataFile = "../AvmlEkfWs/InputFiles/SensorData.csv";
 //    ********* Bag File Path End ********* //
 // ****************************************************************************** //
 //    ********* Global Constants Begin ********* //
